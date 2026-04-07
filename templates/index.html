@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CogniLock — EEG Biometric Authentication</title>
+    <meta name="description" content="CogniLock uses deep learning on EEG brainwave patterns for cutting-edge biometric authentication. Secure, non-invasive, uniquely you.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+    <!-- ====== NEURAL BACKGROUND CANVAS ====== -->
+    <canvas id="neural-bg"></canvas>
+
+    <!-- ====== NAVIGATION ====== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <div class="logo-icon">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                        <circle cx="14" cy="14" r="12" stroke="url(#logoGrad)" stroke-width="2"/>
+                        <path d="M9 14C9 11.5 10.5 9 14 9C17.5 9 19 11.5 19 14C19 16.5 17.5 19 14 19" stroke="url(#logoGrad)" stroke-width="2" stroke-linecap="round"/>
+                        <circle cx="14" cy="14" r="2.5" fill="url(#logoGrad)"/>
+                        <defs>
+                            <linearGradient id="logoGrad" x1="0" y1="0" x2="28" y2="28">
+                                <stop stop-color="#00f0ff"/>
+                                <stop offset="1" stop-color="#7b2ff7"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <span>CogniLock</span>
+            </a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#demo">Demo</a>
+                <a href="#tech">Technology</a>
+            </div>
+            <button class="nav-cta" onclick="scrollToDemo()">Try Demo</button>
+        </div>
+    </nav>
+
+    <!-- ====== HERO SECTION ====== -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="badge-dot"></span>
+                Neural Authentication System
+            </div>
+            <h1 class="hero-title">
+                Your Brain Is The
+                <span class="gradient-text">Password</span>
+            </h1>
+            <p class="hero-subtitle">
+                CogniLock leverages deep learning on EEG brainwave patterns to create an 
+                unbreakable biometric authentication system. No passwords to remember, 
+                no fingerprints to fake — just think.
+            </p>
+            <div class="hero-actions">
+                <button class="btn btn-primary" onclick="scrollToDemo()">
+                    <span>Launch Demo</span>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <button class="btn btn-ghost" onclick="scrollTo('#how-it-works')">
+                    <span>Learn More</span>
+                </button>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-value" data-count="20">0</span>
+                    <span class="stat-label">Subjects Trained</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-value" data-count="4">0</span>
+                    <span class="stat-label">EEG Channels</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-value">1D-CNN</span>
+                    <span class="stat-label">Architecture</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <canvas id="eeg-hero-canvas"></canvas>
+            <div class="brain-glow"></div>
+        </div>
+    </section>
+
+    <!-- ====== FEATURES SECTION ====== -->
+    <section class="features" id="features">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-tag">Why CogniLock</span>
+                <h2 class="section-title">Next-Gen Biometric Security</h2>
+                <p class="section-desc">Traditional authentication fails. Passwords get stolen, fingerprints get cloned. Your brainwaves are the ultimate key.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card" data-aos="fade-up">
+                    <div class="feature-icon" style="--accent: #00f0ff;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
+                            <path d="M2 17L12 22L22 17"/>
+                            <path d="M2 12L12 17L22 12"/>
+                        </svg>
+                    </div>
+                    <h3>Non-Invasive</h3>
+                    <p>Uses standard EEG electrodes that simply rest on the scalp. No implants, no discomfort — just natural brainwave capture.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-icon" style="--accent: #7b2ff7;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="3" y="11" width="18" height="11" rx="2"/>
+                            <path d="M7 11V7C7 4.23858 9.23858 2 12 2C14.7614 2 17 4.23858 17 7V11"/>
+                            <circle cx="12" cy="16" r="1"/>
+                        </svg>
+                    </div>
+                    <h3>Unforgeable</h3>
+                    <p>Brainwave patterns are as unique as DNA but impossible to replicate. Even identical twins have different EEG signatures.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon" style="--accent: #ff6b6b;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z"/>
+                        </svg>
+                    </div>
+                    <h3>Real-Time</h3>
+                    <p>CNN-based inference processes brainwave chunks in milliseconds. Authentication happens as fast as you can think.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-icon" style="--accent: #ffd93d;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"/>
+                            <path d="M8 12L11 15L16 9"/>
+                        </svg>
+                    </div>
+                    <h3>High Accuracy</h3>
+                    <p>Trained on 20 subjects with data augmentation and majority voting, achieving robust authentication across sessions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== HOW IT WORKS ====== -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-tag">The Pipeline</span>
+                <h2 class="section-title">How CogniLock Works</h2>
+                <p class="section-desc">From raw brainwaves to secure authentication in four elegant steps.</p>
+            </div>
+            <div class="steps-timeline">
+                <div class="step" data-step="01">
+                    <div class="step-marker">
+                        <div class="step-number">01</div>
+                        <div class="step-line"></div>
+                    </div>
+                    <div class="step-content">
+                        <h3>EEG Signal Capture</h3>
+                        <p>Record brainwave data from 4 electrode channels — <strong>P4</strong> (parietal), <strong>Cz</strong> (central), <strong>F8</strong> (frontal), and <strong>T7</strong> (temporal).</p>
+                        <div class="step-tags">
+                            <span>4 Channels</span>
+                            <span>Non-invasive</span>
+                            <span>Standard 10-20 System</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="step" data-step="02">
+                    <div class="step-marker">
+                        <div class="step-number">02</div>
+                        <div class="step-line"></div>
+                    </div>
+                    <div class="step-content">
+                        <h3>Signal Preprocessing</h3>
+                        <p>Raw EEG signals are normalized using StandardScaler and segmented into overlapping windows of 100 samples with a step size of 10.</p>
+                        <div class="step-tags">
+                            <span>StandardScaler</span>
+                            <span>Sliding Window</span>
+                            <span>Overlap Chunking</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="step" data-step="03">
+                    <div class="step-marker">
+                        <div class="step-number">03</div>
+                        <div class="step-line"></div>
+                    </div>
+                    <div class="step-content">
+                        <h3>Deep Learning Classification</h3>
+                        <p>A 1D Convolutional Neural Network with 3 conv blocks (64→128→256 filters), batch normalization, and dropout processes each chunk independently.</p>
+                        <div class="step-tags">
+                            <span>1D CNN</span>
+                            <span>BatchNorm</span>
+                            <span>Softmax Output</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="step" data-step="04">
+                    <div class="step-marker">
+                        <div class="step-number">04</div>
+                    </div>
+                    <div class="step-content">
+                        <h3>Majority Vote & Decision</h3>
+                        <p>Predictions across all chunks are aggregated via majority voting. Access is granted only if the average confidence exceeds the security threshold.</p>
+                        <div class="step-tags">
+                            <span>Majority Voting</span>
+                            <span>Confidence Threshold</span>
+                            <span>Access Control</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== DEMO SECTION ====== -->
+    <section class="demo-section" id="demo">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-tag">Interactive</span>
+                <h2 class="section-title">Live Authentication Demo</h2>
+                <p class="section-desc">Upload an EEG recording or try a sample file to see CogniLock in action.</p>
+            </div>
+
+            <div class="demo-layout">
+                <!-- Upload Panel -->
+                <div class="demo-panel upload-panel" id="upload-panel">
+                    <div class="panel-header">
+                        <div class="panel-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M21 15V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V15"/>
+                                <path d="M17 8L12 3L7 8"/>
+                                <path d="M12 3V15"/>
+                            </svg>
+                        </div>
+                        <h3>Upload EEG Data</h3>
+                    </div>
+
+                    <div class="upload-zone" id="upload-zone">
+                        <input type="file" id="eeg-file-input" accept=".csv" hidden>
+                        <div class="upload-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                <path d="M14.5 2H6C4.89543 2 4 2.89543 4 4V20C4 21.1046 4.89543 22 6 22H18C19.1046 22 20 21.1046 20 20V7.5L14.5 2Z"/>
+                                <path d="M14 2V8H20"/>
+                                <path d="M12 18V12"/>
+                                <path d="M9 15L12 12L15 15"/>
+                            </svg>
+                        </div>
+                        <p class="upload-text">Drag & drop your CSV file here</p>
+                        <p class="upload-hint">or click to browse • CSV with columns: P4, Cz, F8, T7</p>
+                        <div class="file-info" id="file-info" style="display:none;">
+                            <span class="file-name" id="file-name"></span>
+                            <button class="file-remove" id="file-remove">✕</button>
+                        </div>
+                    </div>
+
+                    <div class="sample-files">
+                        <p class="sample-label">Or try a sample:</p>
+                        <div class="sample-btns">
+                            <button class="sample-btn" onclick="loadSample('test_label5.csv')" id="sample-btn-5">
+                                <span class="sample-dot" style="background: #00f0ff;"></span>
+                                Subject 5
+                            </button>
+                            <button class="sample-btn" onclick="loadSample('test_label15.csv')" id="sample-btn-15">
+                                <span class="sample-dot" style="background: #7b2ff7;"></span>
+                                Subject 15
+                            </button>
+                            <button class="sample-btn" onclick="loadSample('Random_data.csv')" id="sample-btn-random">
+                                <span class="sample-dot" style="background: #ff6b6b;"></span>
+                                Random Data
+                            </button>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary btn-full" id="auth-btn" onclick="authenticate()" disabled>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2"/>
+                            <path d="M7 11V7C7 4.23858 9.23858 2 12 2C14.7614 2 17 4.23858 17 7V11"/>
+                        </svg>
+                        <span>Authenticate</span>
+                    </button>
+                </div>
+
+                <!-- Results Panel -->
+                <div class="demo-panel results-panel" id="results-panel">
+                    <!-- Loading State -->
+                    <div class="result-state loading-state" id="loading-state" style="display:none;">
+                        <div class="brain-loader">
+                            <div class="brain-pulse"></div>
+                            <div class="brain-pulse p2"></div>
+                            <div class="brain-pulse p3"></div>
+                        </div>
+                        <p>Analyzing brainwave patterns...</p>
+                    </div>
+
+                    <!-- Empty State -->
+                    <div class="result-state empty-state" id="empty-state">
+                        <div class="empty-icon">
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8">
+                                <path d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2Z"/>
+                                <path d="M9 9C9 7.5 10 6 12 6C14 6 15.5 7.5 14.5 9.5C13.5 11.5 12 11 12 13"/>
+                                <circle cx="12" cy="17" r="0.5" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <h3>Awaiting EEG Data</h3>
+                        <p>Upload a file or select a sample to begin authentication</p>
+                    </div>
+
+                    <!-- Success/Fail State -->
+                    <div class="result-state result-data" id="result-data" style="display:none;">
+                        <!-- Access Badge -->
+                        <div class="access-badge" id="access-badge">
+                            <div class="access-icon" id="access-icon"></div>
+                            <div class="access-text">
+                                <span class="access-status" id="access-status"></span>
+                                <span class="access-desc" id="access-desc"></span>
+                            </div>
+                        </div>
+
+                        <!-- Confidence Gauge -->
+                        <div class="gauge-container">
+                            <svg class="gauge-svg" viewBox="0 0 200 200">
+                                <circle class="gauge-bg" cx="100" cy="100" r="85" fill="none" stroke-width="12"/>
+                                <circle class="gauge-fill" id="gauge-fill" cx="100" cy="100" r="85" fill="none" stroke-width="12"
+                                    stroke-dasharray="534" stroke-dashoffset="534"/>
+                            </svg>
+                            <div class="gauge-value">
+                                <span class="gauge-number" id="gauge-number">0</span>
+                                <span class="gauge-percent">%</span>
+                                <span class="gauge-label">Confidence</span>
+                            </div>
+                        </div>
+
+                        <!-- Result Details -->
+                        <div class="result-details">
+                            <div class="detail-row">
+                                <span class="detail-label">Predicted Identity</span>
+                                <span class="detail-value" id="predicted-user">—</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Chunks Analyzed</span>
+                                <span class="detail-value" id="num-chunks">—</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Total Samples</span>
+                                <span class="detail-value" id="total-samples">—</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Security Threshold</span>
+                                <span class="detail-value" id="threshold">—</span>
+                            </div>
+                        </div>
+
+                        <!-- EEG Visualization -->
+                        <div class="eeg-viz" id="eeg-viz">
+                            <div class="viz-header">
+                                <h4>EEG Signal Visualization</h4>
+                                <div class="channel-legend">
+                                    <span class="legend-item" style="--color: #00f0ff;">P4</span>
+                                    <span class="legend-item" style="--color: #7b2ff7;">Cz</span>
+                                    <span class="legend-item" style="--color: #ff6b6b;">F8</span>
+                                    <span class="legend-item" style="--color: #ffd93d;">T7</span>
+                                </div>
+                            </div>
+                            <canvas id="eeg-result-canvas"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== TECHNOLOGY SECTION ====== -->
+    <section class="tech-section" id="tech">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-tag">Under The Hood</span>
+                <h2 class="section-title">Technology Stack</h2>
+                <p class="section-desc">Built with cutting-edge deep learning and signal processing tools.</p>
+            </div>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-card-header">
+                        <span class="tech-label">Model</span>
+                    </div>
+                    <h3>1D CNN</h3>
+                    <p>3-layer convolutional network with batch normalization, designed for temporal EEG pattern recognition.</p>
+                    <div class="tech-specs">
+                        <div class="spec"><span>Layers</span><strong>Conv1D × 3</strong></div>
+                        <div class="spec"><span>Filters</span><strong>64 → 128 → 256</strong></div>
+                        <div class="spec"><span>Dense</span><strong>512 units</strong></div>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-card-header">
+                        <span class="tech-label">Framework</span>
+                    </div>
+                    <h3>TensorFlow / Keras</h3>
+                    <p>Industry-standard deep learning framework for model training and real-time inference.</p>
+                    <div class="tech-specs">
+                        <div class="spec"><span>Optimizer</span><strong>Adam</strong></div>
+                        <div class="spec"><span>Loss</span><strong>Categorical CE</strong></div>
+                        <div class="spec"><span>Callbacks</span><strong>EarlyStopping + LR</strong></div>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-card-header">
+                        <span class="tech-label">Data</span>
+                    </div>
+                    <h3>EEG Signals</h3>
+                    <p>20-subject dataset with 4 scalp electrode channels following the international 10-20 placement system.</p>
+                    <div class="tech-specs">
+                        <div class="spec"><span>Channels</span><strong>P4, Cz, F8, T7</strong></div>
+                        <div class="spec"><span>Chunk Size</span><strong>100 samples</strong></div>
+                        <div class="spec"><span>Augmentation</span><strong>Gaussian noise</strong></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Architecture Diagram -->
+            <div class="architecture">
+                <h3 class="arch-title">Model Architecture</h3>
+                <div class="arch-flow">
+                    <div class="arch-node input-node">
+                        <span class="arch-label">Input</span>
+                        <span class="arch-detail">(100, 4)</span>
+                    </div>
+                    <div class="arch-arrow">→</div>
+                    <div class="arch-node">
+                        <span class="arch-label">Conv1D</span>
+                        <span class="arch-detail">64 filters</span>
+                    </div>
+                    <div class="arch-arrow">→</div>
+                    <div class="arch-node">
+                        <span class="arch-label">Conv1D</span>
+                        <span class="arch-detail">128 filters</span>
+                    </div>
+                    <div class="arch-arrow">→</div>
+                    <div class="arch-node">
+                        <span class="arch-label">Conv1D</span>
+                        <span class="arch-detail">256 filters</span>
+                    </div>
+                    <div class="arch-arrow">→</div>
+                    <div class="arch-node">
+                        <span class="arch-label">Dense</span>
+                        <span class="arch-detail">512 units</span>
+                    </div>
+                    <div class="arch-arrow">→</div>
+                    <div class="arch-node output-node">
+                        <span class="arch-label">Softmax</span>
+                        <span class="arch-detail">20 classes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== FOOTER ====== -->
+    <footer class="footer">
+        <div class="section-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="nav-logo">
+                        <div class="logo-icon">
+                            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                                <circle cx="14" cy="14" r="12" stroke="url(#logoGrad2)" stroke-width="2"/>
+                                <path d="M9 14C9 11.5 10.5 9 14 9C17.5 9 19 11.5 19 14C19 16.5 17.5 19 14 19" stroke="url(#logoGrad2)" stroke-width="2" stroke-linecap="round"/>
+                                <circle cx="14" cy="14" r="2.5" fill="url(#logoGrad2)"/>
+                                <defs>
+                                    <linearGradient id="logoGrad2" x1="0" y1="0" x2="28" y2="28">
+                                        <stop stop-color="#00f0ff"/>
+                                        <stop offset="1" stop-color="#7b2ff7"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <span>CogniLock</span>
+                    </div>
+                    <p>EEG-based biometric authentication powered by deep learning.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Navigate</h4>
+                    <a href="#features">Features</a>
+                    <a href="#how-it-works">How It Works</a>
+                    <a href="#demo">Demo</a>
+                    <a href="#tech">Technology</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Tech Stack</h4>
+                    <a href="#">TensorFlow / Keras</a>
+                    <a href="#">Python / Flask</a>
+                    <a href="#">scikit-learn</a>
+                    <a href="#">EEG Signal Processing</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CogniLock. Built for the future of security.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
